@@ -1,37 +1,32 @@
-# Password Generator (SCRUM Mini Project)
+## Scenariusze testów manualnych (podstawowe)
+1. **Generowanie domyślne**  
+   - Długość: 12, cyfry: ON, specjalne: ON  
+   - Oczekiwane: hasło długości 12, zawiera różne znaki
+2. **Minimalna długość**  
+   - Długość: 4  
+   - Oczekiwane: hasło długości 4
+3. **Przekroczenie zakresu**  
+   - Długość: 100  
+   - Oczekiwane: aplikacja ogranicza do 64
+4. **Brak dodatkowych zestawów**  
+   - Cyfry: OFF, specjalne: OFF  
+   - Oczekiwane: hasło składa się z liter
+5. **Kopiowanie do schowka**  
+   - Kliknij „Kopiuj” po wygenerowaniu  
+   - Oczekiwane: komunikat „Skopiowano do schowka”
 
-Prosta aplikacja webowa do generowania bezpiecznych haseł na podstawie parametrów podanych przez użytkownika. Projekt wykonany zespołowo zgodnie z podejściem Scrum (2 sprinty).
+## Znane ograniczenia
+- Funkcja kopiowania może nie działać w części przeglądarek, jeśli strona jest uruchomiona w trybie z ograniczeniami (np. blokady uprawnień). W takim przypadku hasło można skopiować ręcznie.
 
-## Funkcjonalności
-- Generowanie hasła o zadanej długości (zakres: 4–64)
-- Wybór zestawu znaków:
-  - litery (zawsze)
-  - cyfry (opcjonalnie)
-  - znaki specjalne (opcjonalnie)
-- Walidacja danych wejściowych (min/max długości, komunikaty)
-- Kopiowanie wygenerowanego hasła do schowka
-- Proste komunikaty statusu (np. „Wygenerowano”, „Skopiowano”)
+## Zespół i role (SCRUM)
+- Scrum Master: [Imię Nazwisko]
+- Developer: [Imię Nazwisko]
+- Tester: [Imię Nazwisko]
 
-## Technologie
-- HTML5
-- CSS3
-- JavaScript (Vanilla JS)
-- Git + repozytorium zdalne (GitHub/GitLab)
+## Backlog i sprinty
+Projekt zrealizowany w 2 sprintach:
+- Sprint 1: przygotowanie UI, logika generowania, opcje znaków, walidacja
+- Sprint 2: kopiowanie do schowka, komunikaty, testy manualne, stabilizacja, README
 
-## Uruchomienie projektu
-1. Pobierz repozytorium:
-   - `git clone <LINK_DO_REPO>`
-2. Otwórz folder projektu.
-3. Uruchom `index.html` w przeglądarce (dwuklik).
-
-> Alternatywnie (opcjonalnie) możesz użyć lokalnego serwera, np. w VS Code:
-> - Live Server → „Open with Live Server”
-
-## Struktura projektu
-- `index.html` – interfejs użytkownika oraz logika aplikacji (w jednym pliku)
-
-## Jak używać
-1. Ustaw długość hasła (np. 12).
-2. Zaznacz opcje „Cyfry” i/lub „Znaki specjalne”.
-3. Kliknij **Generuj**, aby utworzyć hasło.
-4. Kliknij **Kopiuj**, aby skopiować wynik do schowka.
+## Licencja
+Projekt edukacyjny (laboratorium) – do użytku niekomercyjnego.
