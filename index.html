@@ -1,0 +1,127 @@
+﻿<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 520px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 6px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 14px;
+            border: 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #out {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+
+        .hint {
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Password Generator</h2>
+    <div class="card">
+        <label>Długość hasła</label>
+        <input id="len" type="number" min="4" max="64" value="12">
+
+        <div class="row" style="margin-top:12px">
+            <label><input id="digits" type="checkbox" checked> Cyfry</label>
+            <label><input id="special" type="checkbox" checked> Znaki specjalne</label>
+        </div>
+
+        <div class="row" style="margin-top:12px">
+            <button id="gen">Generuj</button>
+            <button id="copy">Kopiuj</button>
+            <span id="msg" class="hint"></span>
+        </div>
+
+        <label style="margin-top:12px">Wynik</label>
+        <input id="out" readonly placeholder="Kliknij Generuj…">
+    </div>
+
+    <script>
+    const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const nums = "0123456789";
+    const спец = "!@#$%^&*()-_=+[]{};:,.<>?";
+
+    function randChar(str) {
+      return str[Math.floor(Math.random() * str.length)];
+    }
+
+    function generatePassword(length, useDigits, useSpecial) {
+      let pool = letters;
+      if (useDigits) pool += nums;
+      if (useSpecial) pool += спец;
+
+      if (pool.length === 0) return "";
+
+      let pass = "";
+      for (let i = 0; i < length; i++) pass += randChar(pool);
+      return pass;
+    }
+
+    const lenEl = document.getElementById("len");
+    const digEl = document.getElementById("digits");
+    const spEl  = document.getElementById("special");
+    const outEl = document.getElementById("out");
+    const msgEl = document.getElementById("msg");
+
+    document.getElementById("gen").addEventListener("click", () => {
+      const length = Math.max(4, Math.min(64, Number(lenEl.value || 12)));
+      lenEl.value = length;
+
+      const pass = generatePassword(length, digEl.checked, spEl.checked);
+      outEl.value = pass;
+      msgEl.textContent = pass ? "Wygenerowano." : "Wybierz przynajmniej jeden zestaw znaków.";
+    });
+
+    document.getElementById("copy").addEventListener("click", async () => {
+      if (!outEl.value) { msgEl.textContent = "Brak hasła do skopiowania."; return; }
+      try {
+        await navigator.clipboard.writeText(outEl.value);
+        msgEl.textContent = "Skopiowano do schowka ✅";
+      } catch {
+        msgEl.textContent = "Nie udało się skopiować (blokada przeglądarki).";
+      }
+    });
+    </script>
+</body>
+</html>
